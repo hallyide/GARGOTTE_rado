@@ -21,3 +21,17 @@ ORDER BY c.id;
 --     - DESSERT
 --     - DSSRT
 --     - ...
+
+-- Etape 3 :
+
+SELECT
+    c.id AS id_commande,
+    c.dates,
+    SUM(p.prix * cf.nombre) AS montant_total
+FROM commande c
+LEFT JOIN commande_fille cf ON cf.id_commande = c.id
+LEFT JOIN plat p ON p.id = cf.id_plat
+GROUP BY c.id, c.dates
+ORDER BY c.id;
+
+-- je places la quantite du plat dans commandes_fille.
